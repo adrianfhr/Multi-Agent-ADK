@@ -1,0 +1,38 @@
+name: Probabilistic LLM Evaluation (World 2)
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Run nightly at 00:00
+  workflow_dispatch: # Allow manual trigger on release
+  
+jobs:
+  llm-evaluation:
+    name: Ragas Task Evaluation
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+        cache: 'pip'
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -e .[dev]
+        
+    - name: Run Ragas Nightly Evaluation
+      env:
+        GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      run: make eval
+      
+    - name: Upload Metric Reports
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: ragas-eval-report
+        path: evaluations/reports/

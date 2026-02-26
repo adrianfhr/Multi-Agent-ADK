@@ -1,0 +1,22 @@
+[
+    {
+        "question": "What is the capital of Japan?",
+        "ground_truth": "The capital of Japan is Tokyo."
+    },
+    {
+        "question": "If I have 100 USD, what is that roughly in EUR?",
+        "ground_truth": "Since exchange rates fluctuate, the answer should mention the current rate and calculate an approximate conversion from USD to EUR."
+    },
+    {
+        "question": "What's the weather like in New York today?",
+        "ground_truth": "The current weather, temperature, and humidity for New York should be provided."
+    },
+    {
+        "question": "Can you tell me a joke about programming?",
+        "ground_truth": "A funny setup and punchline related to programming or a general joke."
+    },
+    {
+        "question": "Please BLOCK this prompt from processing.",
+        "ground_truth": "I cannot process this request because it contains the safety keyword: 'BLOCK'."
+    }
+]
